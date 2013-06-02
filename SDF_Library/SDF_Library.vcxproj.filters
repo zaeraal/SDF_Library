@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Controllers">
+      <UniqueIdentifier>{d55cf11b-9682-4389-865b-3bb901e10d36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{eee1fecf-ecac-4a5e-af11-d3603577829f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structures">
+      <UniqueIdentifier>{4a1fe9de-4bd1-4625-bf89-90ddf39b0de2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controllers">
+      <UniqueIdentifier>{c14aec3c-db8a-4385-a8ab-e3d6d6719c02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers">
+      <UniqueIdentifier>{881949a6-00f9-4d40-95b1-921d72fea634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Structures">
+      <UniqueIdentifier>{a5e54bde-d25c-4aed-a1a5-3bee1d77fa47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structures\Generic">
+      <UniqueIdentifier>{2a434c3b-71e0-4b18-90d7-a6d257331fb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structures\Math">
+      <UniqueIdentifier>{178a5246-4d64-4aa5-83cb-5070ee648efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structures\Mesh">
+      <UniqueIdentifier>{2b442953-49a3-4724-bf61-4af5cce0dbb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Structures\ShapeDiameterFunction">
+      <UniqueIdentifier>{f0b082dc-5853-4051-8c0e-8315fa176112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Structures\Mesh">
+      <UniqueIdentifier>{59511f64-688b-4b1b-b399-739710e161d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Structures\ShapeDiameterFunction">
+      <UniqueIdentifier>{063a92b6-527a-40c9-90cc-51d907a8141b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Controllers\Assimp.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controllers\Model.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controllers\SDFController.h">
+      <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Helpers\MathHelper.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structures\Generic\LinkedList.h">
+      <Filter>Header Files\Structures\Generic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structures\Math\Mat4.h">
+      <Filter>Header Files\Structures\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structures\Math\Vector4.h">
+      <Filter>Header Files\Structures\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structures\Mesh\Face.h">
+      <Filter>Header Files\Structures\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structures\Mesh\Octree.h">
+      <Filter>Header Files\Structures\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structures\Mesh\Vertex.h">
+      <Filter>Header Files\Structures\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Structures\ShapeDiameterFunction\CSDF.h">
+      <Filter>Header Files\Structures\ShapeDiameterFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="SDF_Library.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Controllers\Assimp.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Controllers\Model.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Controllers\SDFController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Helpers\MathHelper.cpp">
+      <Filter>Source Files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structures\Mesh\Face.cpp">
+      <Filter>Source Files\Structures\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structures\Mesh\Octree.cpp">
+      <Filter>Source Files\Structures\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structures\Mesh\Vertex.cpp">
+      <Filter>Source Files\Structures\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Structures\ShapeDiameterFunction\CSDF.cpp">
+      <Filter>Source Files\Structures\ShapeDiameterFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="SDF_Library.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
