@@ -236,7 +236,9 @@ void DeleunayTriangulator::computeGlobalTriangulationFromPoints(int numOfPoints,
         (*normals)[i * 3 + 1] = -(*normals)[i * 3 + 1];
         (*normals)[i * 3 + 2] = -(*normals)[i * 3 + 2];
 
-        neighVis[i].visNormals[0] = PCTCVector3((*normals)[i * 3], (*normals)[i * 3 + 1], (*normals)[i * 3 + 2]);
+		if (visualization){
+			neighVis[i].visNormals[0] = PCTCVector3((*normals)[i * 3], (*normals)[i * 3 + 1], (*normals)[i * 3 + 2]);
+		}
     }
 
  	*indices = new int[v_indices.size()];
