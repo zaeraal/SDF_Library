@@ -1,6 +1,7 @@
 // Model.cpp : subor pre kontrolu modelov
 #include "stdafx.h"
 #include "Model.h"
+#include "PointCloudTriangulation.h"
 
 namespace ModelController
 {
@@ -161,6 +162,120 @@ namespace ModelController
 		return values;
 	}
 
+	void CModel::DeleteIdenticalVertices()
+	{
+		float delta = b_size * 2 * 0.00001f;
+		LinkedList<Vertex>* new_vertices = new LinkedList<Vertex>();
+		LinkedList<Vertex>::Cell<Vertex>* tmp1 = points->start;
+		while(tmp1 != NULL)
+		{
+			bool add = true;
+			LinkedList<Vertex>::Cell<Vertex>* tmp2 = points->start;
+			while(tmp2 != NULL)
+			{
+				if(tmp1 == tmp2)
+					break;
+				float distance = tmp1->data->P.Dist(tmp2->data->P);
+				if(distance < delta)
+				{
+					add = false;
+					break;
+				}	
+				tmp2 = tmp2->next;
+			}
+			if(add == true)
+				new_vertices->InsertToEnd(tmp1->data);
+			tmp1 = tmp1->next;
+		}
+		delete points;
+		points = new_vertices;
+	}
+
+	void CModel::Triangulate ()
+	{
+		if(m_root != NULL)
+			delete m_root;
+
+		triangles->CompleteDelete();
+		delete triangles;
+		triangles = new LinkedList<Face>();
+
+		DeleteIdenticalVertices();
+
+		PointCloudTriangulation::DeleunayTriangulator *pTriangulator = new PointCloudTriangulation::DeleunayTriangulator();
+		//pTriangulator->setKNeighParams(0.02, 8, 12);
+		//pTriangulator->setCenterFactorParams(0.2, 0.5, 2.0);
+
+		int numOfTriangles = 0;
+		int *triangleverts = NULL;
+		float *normals = NULL;
+		unsigned int numOfVertices = points->GetSize();
+		Vertex** tmp_points = new Vertex* [numOfVertices];
+
+		// prekopcime do pola, koli lepsiemu pristupu
+		LinkedList<Vertex>::Cell<Vertex>* tmp = points->start;
+		unsigned int i = 0;
+		while(tmp != NULL)
+		{
+			tmp_points[i] = tmp->data;
+			tmp = tmp->next;
+			i++;
+		}
+
+		// zoznam ktory davam do Madovej libky
+		float * verts = new float[numOfVertices * 3];
+		for(unsigned int ii = 0; ii < numOfVertices; ii++)
+		{
+			verts[ii * 3] = tmp_points[ii]->P.X;
+			verts[ii * 3 + 1] = tmp_points[ii]->P.Y;
+			verts[ii * 3 + 2] = tmp_points[ii]->P.Z;
+		}
+
+		for(unsigned int iii = 0; iii < numOfVertices; iii++)
+		{
+			delete tmp_points[iii]->susedia;
+			tmp_points[iii]->susedia = new LinkedList<void>();
+		}
+
+		// triangulacia v Madovej libke
+		pTriangulator->computeGlobalTriangulationFromPoints(numOfVertices, verts, numOfTriangles, &triangleverts, &normals, false);
+
+		// kopcenie normal
+		for (unsigned int l=0; l<numOfVertices; l++)
+		{
+			Vector4 normala = Vector4(normals[l * 3 + 0], normals[l * 3 + 1], normals[l * 3 + 2]);
+			tmp_points[l]->SetNormal(normala);
+		}
+
+		// prelinkovanie struktur
+		for (int l=0; l<numOfTriangles; l++)
+		{
+			int v1 = triangleverts[l * 3 + 0];
+			int v2 = triangleverts[l * 3 + 1];
+			int v3 = triangleverts[l * 3 + 2];		
+			Face* novy_face = new Face(tmp_points[v1], tmp_points[v2], tmp_points[v3]);
+			Vector4 t_nor = tmp_points[v1]->GetNormal() + tmp_points[v2]->GetNormal() + tmp_points[v3]->GetNormal();
+			t_nor.Normalize();
+			novy_face->normal = t_nor;
+			triangles->InsertToEnd(novy_face);
+			tmp_points[v1]->susedia->InsertToEnd(novy_face);
+			tmp_points[v2]->susedia->InsertToEnd(novy_face);
+			tmp_points[v3]->susedia->InsertToEnd(novy_face);
+		}
+
+		loaded = true;
+
+		// postprocessing ako Octree a pod.
+		CreateOctree();
+		SetColors();
+		ComputeSusedov();
+
+		delete pTriangulator;
+		delete [] verts;
+		delete [] triangleverts;
+		delete [] normals;
+		delete [] tmp_points;
+	}
 	// resetuje "show" nastavenia
 	void CModel::ResetSettings()
 	{

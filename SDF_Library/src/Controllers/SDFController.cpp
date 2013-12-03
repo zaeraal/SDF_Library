@@ -114,7 +114,7 @@ namespace SDFController
 					intersected = rayIntersectsTriangle(current_face->data->center, ray, intersected_face->data->v[0]->P, intersected_face->data->v[1]->P, intersected_face->data->v[2]->P, dist2);
 					if(intersected == true)
 					{
-						theta = acos( (ray * (current_face->data->normal * (-1))) / (ray.Length() * current_face->data->normal.Length()) );
+						theta = acos( (ray * intersected_face->data->normal) / (ray.Length() * intersected_face->data->normal.Length()) );
 						theta = theta * float(180.0 / M_PI);
 						//loggger->logInfo(MarshalString("pridany ray s thetou: " + theta));
 						if((theta < 90.0f) && (dist2 < dist))

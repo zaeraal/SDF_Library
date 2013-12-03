@@ -4,13 +4,13 @@
 
 namespace MathStructures
 {
-    struct Vector4
-    {
-		public:
-        float X;
-        float Y;
-        float Z;
-        float W;
+	struct Vector4
+	{
+	public:
+		float X;
+		float Y;
+		float Z;
+		float W;
 
 		Vector4 (): X(0), Y(0), Z(0), W(0) {}
 		Vector4 (float x, float y, float z, float w = 0) { Init(x,y,z,w); }
@@ -23,7 +23,15 @@ namespace MathStructures
 			W = w;
 		}
 
-        float Length () { return sqrt(X * X + Y * Y + Z * Z); }
+		float Length () { return sqrt(X * X + Y * Y + Z * Z); }
+
+		float Dist (Vector4 a)
+		{
+			float xd = X - a.X;
+			float yd = Y - a.Y;
+			float zd = Z - a.Z;
+			return sqrt(xd*xd + yd*yd  + zd*zd);
+		}
 
 		void Normalize ()
 		{
@@ -33,9 +41,9 @@ namespace MathStructures
 			Z = Z/length;
 			//W = W/length;
 		}
-    };
-	
-	#pragma region Operators
+	};
+
+#pragma region Operators
 
 	// sum of 2 vectors
 	inline Vector4 operator+(const Vector4& lhs, const Vector4& rhs)
@@ -101,5 +109,5 @@ namespace MathStructures
 		result.Z = lhs.X * rhs.Y - lhs.Y * rhs.X;
 		return result;
 	}
-	#pragma endregion
+#pragma endregion
 }

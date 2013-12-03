@@ -23,4 +23,14 @@ namespace MeshStructures
 	{
 		delete susedia;
 	}
+
+	void Vertex::SetNormal(Vector4 normala)
+	{
+		normal = normala;
+	}
+
+	Vector4 Vertex::GetNormal()
+	{
+		return normal;
+	}
 }

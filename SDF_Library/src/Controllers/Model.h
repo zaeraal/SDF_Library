@@ -25,6 +25,7 @@ namespace ModelController
 		void LoadFile(string Filename);
 		void LoadAssimp(aiScene* scene);
 		//float GetSDF(const struct aiFace* face, bool smoothed);
+		void Triangulate();
 		float* GetSDF(int& size, bool smoothed);
 		void ResetSettings();
 		void ComputeBoundary();
@@ -40,6 +41,7 @@ namespace ModelController
 		int GetTriangleCount();
 		void ProcessPick(int x, int y);
 		void ComputeSDF();
+		void DeleteIdenticalVertices();
 
 		bool loaded;
 		bool show_octree;
