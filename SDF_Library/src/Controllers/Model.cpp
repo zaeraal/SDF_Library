@@ -168,12 +168,31 @@ namespace ModelController
 		unsigned int size = points->GetSize();
 		for(unsigned int i = 0; i < size; i++)
 		{
+			std::stringstream ss;
+			ss << "Povodna suradnica vertexu c. ";
+			ss << i;
+			ss << " je X: ";
+			ss << tmp->data->P.X;
+			ss << ", Y: ";
+			ss << tmp->data->P.Y;
+			ss << ", Z: ";
+			ss << tmp->data->P.Z;
+			ss << "\n";
+			ss << "Nova suradnica vertexu c. ";
+			ss << i;
+			ss << " je X: ";
+			ss << pos[(i * 3) + 0];
+			ss << ", Y: ";
+			ss << pos[(i * 3) + 1];
+			ss << ", Z: ";
+			ss << pos[(i * 3) + 2];
+			logInfo(ss.str());
 			tmp->data->P.X = pos[(i * 3) + 0];
 			tmp->data->P.Y = pos[(i * 3) + 1];
 			tmp->data->P.Z = pos[(i * 3) + 2];
 			tmp = tmp->next;
 		}
-		RecomputeNormals();
+		//RecomputeNormals();
 
 		if(m_root != NULL)
 			delete m_root;
