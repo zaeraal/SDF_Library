@@ -192,7 +192,7 @@ namespace ModelController
 			tmp->data->P.Z = pos[(i * 3) + 2];
 			tmp = tmp->next;
 		}
-		//RecomputeNormals();
+		RecomputeNormals();
 
 		if(m_root != NULL)
 			delete m_root;
