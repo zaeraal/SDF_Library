@@ -188,6 +188,10 @@ namespace ModelController
 		while(tmp != NULL)
 		{
 			tmp->data->ComputeNormal();
+			tmp->data->diameter->value = 0.0f;
+			tmp->data->diameter->smoothed = 0.0f;
+			tmp->data->diameter->normalized1 = 0.0f;
+			tmp->data->diameter->normalized2 = 0.0f;
 			tmp = tmp->next;
 		}
 
