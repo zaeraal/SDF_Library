@@ -27,6 +27,7 @@ namespace ModelController
 		//float GetSDF(const struct aiFace* face, bool smoothed);
 		void Triangulate();
 		float* GetSDF(int& size, bool smoothed);
+		void SetNewPositions(float* pos);
 		void ResetSettings();
 		void ComputeBoundary();
 		void CreateOctree();
@@ -42,6 +43,7 @@ namespace ModelController
 		void ProcessPick(int x, int y);
 		void ComputeSDF();
 		void DeleteIdenticalVertices();
+		void RecomputeNormals();
 
 		bool loaded;
 		bool show_octree;

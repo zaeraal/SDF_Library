@@ -162,6 +162,37 @@ namespace ModelController
 		return values;
 	}
 
+	void CModel::SetNewPositions(float* pos)
+	{
+		LinkedList<Vertex>::Cell<Vertex>* tmp = points->start;
+		unsigned int size = points->GetSize();
+		for(unsigned int i = 0; i < size; i++)
+		{
+			tmp->data->P.X = pos[(i * 3) + 0];
+			tmp->data->P.Y = pos[(i * 3) + 1];
+			tmp->data->P.Z = pos[(i * 3) + 2];
+			tmp = tmp->next;
+		}
+		RecomputeNormals();
+
+		if(m_root != NULL)
+			delete m_root;
+
+		m_root = NULL;
+		CreateOctree();
+	}
+
+	void CModel::RecomputeNormals()
+	{
+		LinkedList<Face>::Cell<Face>* tmp = triangles->start;
+		while(tmp != NULL)
+		{
+			tmp->data->ComputeNormal();
+			tmp = tmp->next;
+		}
+
+	}
+
 	void CModel::DeleteIdenticalVertices()
 	{
 		float delta = b_size * 2 * 0.00001f;
