@@ -162,6 +162,29 @@ namespace ModelController
 		return values;
 	}
 
+	float* CModel::GetNormals(int& size)
+	{
+		LinkedList<Vertex>::Cell<Vertex>* tmp = points->start;
+		size = points->GetSize();
+		float* values = new float[size * 3];
+		for(int i = 0; i < size; i++)
+		{
+			Vector4 hodnota = Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+			LinkedList<void>::Cell<void>* tm = tmp->data->susedia->start;
+			while(tm != NULL)
+			{
+				hodnota = hodnota + ((Face*)tm->data)->normal;
+				tm = tm->next;
+			}
+			hodnota.Normalize();
+			values[i * 3 + 0] = hodnota.X;
+			values[i * 3 + 1] = hodnota.Y;
+			values[i * 3 + 2] = hodnota.Z;
+			tmp = tmp->next;
+		}
+		return values;
+	}
+
 	void CModel::SetNewPositions(float* pos)
 	{
 		LinkedList<Vertex>::Cell<Vertex>* tmp = points->start;

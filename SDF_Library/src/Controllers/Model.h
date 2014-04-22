@@ -27,6 +27,7 @@ namespace ModelController
 		//float GetSDF(const struct aiFace* face, bool smoothed);
 		void Triangulate();
 		float* GetSDF(int& size, bool smoothed);
+		float* GetNormals(int& size);
 		void SetNewPositions(float* pos);
 		void ResetSettings();
 		void ComputeBoundary();
